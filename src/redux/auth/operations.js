@@ -11,3 +11,13 @@ export const setToken = token => {
 export const clearToken = () => {
   authInstance.defaults.headers.common.Authorization = '';
 };
+
+export const apiRegisterUser = createAsyncThunk(
+  'users/registerUser',
+  async (formData, thunkApi) => {
+    try {
+      const { data } = await authInstance.post('./users/signup', formData);
+      return data;
+    } catch (error) {}
+  }
+);
