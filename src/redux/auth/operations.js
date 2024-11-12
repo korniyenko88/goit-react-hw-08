@@ -17,7 +17,11 @@ export const apiRegisterUser = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.post('./users/signup', formData);
+     console.log('data: ', data);
+
       return data;
-    } catch (error) {}
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
   }
 );
