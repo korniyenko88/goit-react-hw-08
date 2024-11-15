@@ -1,8 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { registrationShape } from '../FormFieldValidator/FormFieldValidator';
 import styles from './RegistrationForm.module.css';
-
+// apiRegisterUser;
 const INITIAL_VALUES = {
   name: '',
   email: '',
@@ -10,8 +11,15 @@ const INITIAL_VALUES = {
 };
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+  const nameInputId = useId();
+  const emailInput = useId();
+  const passwordInput = useId();
+
   const handleSubmit = (values, actions) => {
-    console.log("values: ", values);
+    const auth = { ...values };
+    const action = apiRegisterUser(auth);
+    dispatch(action);
     actions.resetForm();
   };
   return (
@@ -24,7 +32,13 @@ const RegistrationForm = () => {
         <Form className={styles.form}>
           <label className={styles.formname}>
             <span>Name</span>
-            <Field className={styles.input} name="name" type="text" />
+            <Field
+              id={nameInputId}
+              className={styles.input}
+              placeholder="enter your name ..."
+              name="name"
+              type="text"
+            />
             <ErrorMessage
               name="name"
               component="span"
@@ -33,7 +47,13 @@ const RegistrationForm = () => {
           </label>
           <label className={styles.formname}>
             <span>Email</span>
-            <Field className={styles.input} name="email" type="text" />
+            <Field
+              id={emailInput}
+              className={styles.input}
+              placeholder="enter your email ..."
+              name="email"
+              type="text"
+            />
             <ErrorMessage
               name="email"
               component="span"
@@ -42,7 +62,13 @@ const RegistrationForm = () => {
           </label>
           <label className={styles.formname}>
             <span>Password</span>
-            <Field className={styles.input} name="password" type="password" />
+            <Field
+              id={passwordInput}
+              className={styles.input}
+              placeholder="enter your password ..."
+              name="password"
+              type="password"
+            />
             <ErrorMessage
               name="password"
               component="span"

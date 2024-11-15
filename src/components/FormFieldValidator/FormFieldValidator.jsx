@@ -46,3 +46,21 @@ export const registrationShape = Yup.object({
       'Password must contain at least one special character'
     ),
 });
+
+export const loginShape = Yup.object({
+  email: Yup.string()
+    .required('Email is required')
+    .email('Invalid email format')
+    .max(50, "Email can't be longer than 50 characters"),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .max(20, "Password can't be longer than 20 characters")
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .matches(/\d/, 'Password must contain at least one number')
+    .matches(
+      /[@$!%*?&#]/,
+      'Password must contain at least one special character'
+    ),
+});

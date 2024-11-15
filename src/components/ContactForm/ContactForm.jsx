@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 
 
 const INITIAL_VALUES = {
+  id: '',
   name: '',
   number: '',
 };
@@ -15,22 +16,21 @@ const INITIAL_VALUES = {
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const nameInputId = useId();
+  const numberInputId = useId();
 
-  const handleSubmit = async (values, actions) => {
+   const handleSubmit = (values, actions) => {
     const contact = {
-      name: values.name,
-      number: values.number,
+      ...values,
     };
 
-    try {
-      const action = await dispatch(addContact(contact)); 
-      if (addContact.fulfilled.match(action)) {
-        actions.resetForm(); 
-      }
-    } catch (error) {
-      console.error('Failed to save contact: ', error);
-    }
+    const action = addContact(contact);
+    dispatch(action);
+
+    actions.resetForm();
   };
+
+    
 
   return (
     <div className={styles.divform}>
@@ -40,18 +40,28 @@ const ContactForm = () => {
         onSubmit={handleSubmit}
       >
         <Form className={styles.form}>
-          <label className={styles.formname}>
+          <label htmlFor={nameInputId} className={styles.formname}>
             <span>Name</span>
-            <Field className={styles.input} name="name" type="text" />
+            <Field
+              className={styles.input}
+              name="name"
+              type="text"
+              id={nameInputId}
+            />
             <ErrorMessage
               name="name"
               component="span"
               className={styles.error}
             />
           </label>
-          <label className={styles.formname}>
+          <label htmlFor={numberInputId} className={styles.formname}>
             <span>Number</span>
-            <Field className={styles.input} name="number" type="text" />
+            <Field
+              className={styles.input}
+              name="number"
+              type="text"
+              id={numberInputId}
+            />
             <ErrorMessage
               name="number"
               component="span"
