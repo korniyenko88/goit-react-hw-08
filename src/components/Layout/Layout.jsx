@@ -1,11 +1,12 @@
+import { Suspense } from 'react';
 import AppBar from '../AppBar/AppBar';
-import React, { Suspense } from 'react';
 
-const Layout = () => {
+const Layout = ({ children }) => {
+ 
   return (
     <div>
       <AppBar />
-      {/* <Suspense fallback={null}>{children}</Suspense> */}
+      <Suspense fallback={null}>{children}</Suspense>
     </div>
   );
 };

@@ -27,17 +27,19 @@ export const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <Layout>
+      <Layout>
+        
       <Routes>
         <Route path="/" element={<HomePage />} />
 
         <Route
           path="/register"
           element={
-            <RestrictedRoute
-              restrictedTo="/contacts"
-              component={<RegistrationPage />}
-            />
+            <RegistrationPage />
+            // <RestrictedRoute
+            //   restrictedTo="/contacts"
+            //   component={<RegistrationPage />}
+            // />
           }
         />
 

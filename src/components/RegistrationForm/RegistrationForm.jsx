@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useId } from 'react';
 import { useDispatch } from 'react-redux';
+import { apiRegisterUser } from '../../redux/auth/operations';
 import { registrationShape } from '../FormFieldValidator/FormFieldValidator';
 import styles from './RegistrationForm.module.css';
 // apiRegisterUser;
@@ -26,7 +27,7 @@ const RegistrationForm = () => {
     <div>
       <Formik
         initialValues={INITIAL_VALUES}
-        validationSchema={registrationShape}
+        // validationSchema={registrationShape}
         onSubmit={handleSubmit}
       >
         <Form className={styles.form}>

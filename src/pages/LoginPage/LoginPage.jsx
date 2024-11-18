@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader/Loader';
 import { selectIsError, selectIsLoading } from '../../redux/auth/selectors';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 const LoginPage = () => {
   const loader = useSelector(selectIsLoading);
