@@ -1,10 +1,10 @@
 import { useId } from 'react';
 import { useDispatch } from 'react-redux';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { loginShape} from '../FormFieldValidator/FormFieldValidator';
+import { loginShape } from '../FormFieldValidator/FormFieldValidator';
 import { apiLogInUser } from '../../redux/auth/operations';
 import toast from 'react-hot-toast';
-
+import styles from './LoginForm.module.css'
 
 const initialValues = {
   email: '',
@@ -16,58 +16,66 @@ const LoginForm = () => {
   const emailInput = useId();
   const passwordInput = useId();
 
-   const handleSubmit = async (values, actions) => {
-     const auth = { ...values };
+  const handleSubmit = async (values, actions) => {
+    const auth = { ...values };
 
-     try {
-       await dispatch(apiLogInUser(auth)).unwrap(); 
-     } catch (error) {
-       
-       toast.error('Invalid email or password');
-     } finally {
-       actions.resetForm();
-     }
-   };
-
+    try {
+      await dispatch(apiLogInUser(auth)).unwrap();
+    } catch (error) {
+      toast.error('Invalid email or password');
+    } finally {
+      actions.resetForm();
+    }
+  };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={loginShape}
-    >
-      <Form>
-        <div>
+    <div className={styles.divform}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={loginShape}
+      >
+        <Form className={styles.form}>
           <label htmlFor={emailInput}>
-            <span>Email</span>
+            <span className={styles.formname}>Email</span>
 
             <Field
+              className={styles.input}
               type="email"
               name="email"
               id={emailInput}
               placeholder="enter email..."
             />
-            <ErrorMessage name="email" component="span" />
+            <ErrorMessage
+              className={styles.error}
+              name="email"
+              component="span"
+            />
           </label>
 
           <label htmlFor={passwordInput}>
-            <span>Password</span>
+            <span className={styles.formname}>Password</span>
 
             <Field
+              className={styles.input}
               type="password"
               name="password"
               id={passwordInput}
               placeholder="enter password..."
             />
-            <ErrorMessage name="password" component="span" />
+            <ErrorMessage
+              className={styles.error}
+              name="password"
+              component="span"
+            />
           </label>
 
-          <button  type="submit">
+          <button className={styles.addbtn} type="submit">
             Log In
           </button>
-        </div>
-      </Form>
-    </Formik>
+        </Form>
+      </Formik>
+    </div>
   );
 };
 

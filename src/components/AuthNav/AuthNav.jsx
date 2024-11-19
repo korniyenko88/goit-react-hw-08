@@ -8,7 +8,7 @@ const buildStylesClass = ({ isActive }) =>
 
 const AuthNav = () => {
   return (
-    <div>
+    <div className={styles.AuthNav}>
       <NavLink to="/register" className={buildStylesClass}>
         Register
       </NavLink>

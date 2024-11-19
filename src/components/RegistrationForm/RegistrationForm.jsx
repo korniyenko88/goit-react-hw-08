@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { apiRegisterUser } from '../../redux/auth/operations';
 import { registrationShape } from '../FormFieldValidator/FormFieldValidator';
 import styles from './RegistrationForm.module.css';
-// apiRegisterUser;
+
 const INITIAL_VALUES = {
   name: '',
   email: '',
@@ -17,25 +17,22 @@ const RegistrationForm = () => {
   const emailInput = useId();
   const passwordInput = useId();
 
-const handleSubmit = async (values, actions) => {
-  const auth = { ...values };
+  const handleSubmit = async (values, actions) => {
+    const auth = { ...values };
 
-  try {
-    // Виконуємо асинхронний запит на реєстрацію
-    const action = apiRegisterUser(auth);
-    dispatch(action);
-    actions.resetForm();
-  } catch (error) {
-    // Обробка помилки
-    console.error(
-      'Registration Error:',
-      error.response ? error.response.data : error.message
-    );
-    // Тут можна додати логіку для показу повідомлення про помилку користувачу, якщо потрібно
-  }
-};
+    try {
+      const action = apiRegisterUser(auth);
+      dispatch(action);
+      actions.resetForm();
+    } catch (error) {
+      console.error(
+        'Registration Error:',
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
   return (
-    <div>
+    <div className={styles.divform}>
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={registrationShape}

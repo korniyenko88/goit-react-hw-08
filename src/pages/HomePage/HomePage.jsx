@@ -4,20 +4,15 @@ import { selectIsLoggedIn, selectUser } from '../../redux/auth/selectors';
 
 const HomePage = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const user = useSelector(selectUser);
+
   return (
     <div>
       {isLoggedIn ? (
-        <h1 >
-          <span>👤</span> Hi {user.name}, Welcome to your Phone Book!{' '}
-          <span>📞</span>
-        </h1>
+        <h1>Welcome to your Phone Book!</h1>
       ) : (
         <>
-          <h1>
-            <span>👤</span> Welcome to the phone book! <span>📞</span>
-          </h1>
-          <h2>Please log in to your account or register!</h2>
+          <h1>Welcome to the phone book!</h1>
+          <h2>To continue, please log in or register an account!</h2>
         </>
       )}
     </div>

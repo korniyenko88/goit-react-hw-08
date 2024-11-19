@@ -10,13 +10,13 @@ const UserMenu = () => {
   return (
     <div className={styles.userMenu}>
       {user ? (
-        <p>
+        <p className={styles.userMenuText}>
           Welcome, <span>{user.name}!</span>
         </p>
       ) : (
-        <p>Welcome, Guest!</p>
+        <p className={styles.userMenuText}>Welcome, Guest!</p>
       )}
-      <button type="button" onClick={() => dispatch(apiLogOutUser())}>
+      <button className={styles.menuBtn} type="button" onClick={() => dispatch(apiLogOutUser())}>
         Logout
       </button>
     </div>
