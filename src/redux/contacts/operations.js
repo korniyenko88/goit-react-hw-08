@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { authInstance } from '../auth/operations';
+import toast from 'react-hot-toast';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -42,6 +43,9 @@ export const editContact = createAsyncThunk(
 );
 
 
+
+
+
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
@@ -56,7 +60,7 @@ export const deleteContact = createAsyncThunk(
           error.response.data &&
           error.response.data.message) ||
         error.message;
-      console.error('Error deleting contact:', errorMsg); // Логування помилки
+      console.error('Error deleting contact:', errorMsg);
       return thunkAPI.rejectWithValue(errorMsg);
     }
   }

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
 import { addContactShape } from '../FormFieldValidator/FormFieldValidator';
 import { useId } from 'react';
+import toast from 'react-hot-toast';
 
 
 
@@ -20,16 +21,21 @@ const ContactForm = () => {
   const nameInputId = useId();
   const numberInputId = useId();
 
-   const handleSubmit = (values, actions) => {
-    const contact = {
-      ...values,
-    };
+     const handleSubmit = async (values, actions) => {
+       const contact = {
+         ...values,
+       };
 
-    const action = addContact(contact);
-    dispatch(action);
+       try {
+          dispatch(addContact(contact)); 
+         toast.success('Contact added successfully!');
+       } catch (error) {
+         console.error('Failed to add contact: ', error);
+         toast.error(`Error: ${error.message}`);
+       }
 
-    actions.resetForm();
-  };
+       actions.resetForm();
+     };
 
     
 

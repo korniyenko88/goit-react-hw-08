@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredContacts } from '../../redux/filters/selectors';
 import styles from './ContactList.module.css';
 import Contact from '../Contact/Contact';
+import { Toaster } from 'react-hot-toast';
 
 const ContactList = () => {
   const selectContacts = useSelector(selectFilteredContacts);
 
   return (
     <div>
+      <Toaster />
       <ul className={styles.list}>
         {selectContacts && selectContacts.length > 0 ? (
           selectContacts.map(cont => (
