@@ -35,11 +35,11 @@ export const App = () => {
         <Route
           path="/register"
           element={
-            <RegistrationPage />
-            // <RestrictedRoute
-            //   restrictedTo="/contacts"
-            //   component={<RegistrationPage />}
-            // />
+            
+            <RestrictedRoute
+              restrictedTo="/contacts"
+              component={<RegistrationPage />}
+            />
           }
         />
 

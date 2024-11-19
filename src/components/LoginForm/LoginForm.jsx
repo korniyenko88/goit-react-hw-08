@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { loginShape} from '../FormFieldValidator/FormFieldValidator';
 import { apiLogInUser } from '../../redux/auth/operations';
-import clsx from 'clsx';
+import toast from 'react-hot-toast';
 
 
 const initialValues = {
@@ -16,12 +16,19 @@ const LoginForm = () => {
   const emailInput = useId();
   const passwordInput = useId();
 
-  const handleSubmit = (values, actions) => {
-    const auth = { ...values };
-    const action = apiLogInUser(auth);
-    dispatch(action);
-    actions.resetForm();
-  };
+   const handleSubmit = async (values, actions) => {
+     const auth = { ...values };
+
+     try {
+       await dispatch(apiLogInUser(auth)).unwrap(); 
+     } catch (error) {
+       
+       toast.error('Invalid email or password');
+     } finally {
+       actions.resetForm();
+     }
+   };
+
 
   return (
     <Formik

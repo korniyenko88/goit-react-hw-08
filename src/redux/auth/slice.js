@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   isLoading: false,
   error: null,
   token: null,
-  isRefreshing: false,
+  isRefreshing: null,
   isLoggedIn: false,
 };
 
@@ -23,6 +23,9 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  if (state.isRefreshing) {
+    state.isRefreshing = false;
+  }
 };
 
 const authSlice = createSlice({

@@ -32,11 +32,10 @@ export const apiLogInUser = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.post('/users/login', formData);
-
       setToken(data.token);
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.status);
+      return thunkApi.rejectWithValue(error.message || 'Login failed');
     }
   }
 );
@@ -61,7 +60,7 @@ export const apiRefreshUser = createAsyncThunk(
     const state = thunkApi.getState();
     const persistToken = state.auth.token;
 
-    if (!persistToken) {
+    if (persistToken === null) {
       return thunkApi.rejectWithValue('Unable to fetch user');
     }
 
@@ -71,7 +70,7 @@ export const apiRefreshUser = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(
-        error.response?.data?.message || error.message
+        error.response ? error.response.data.message : error.message
       );
     }
   }

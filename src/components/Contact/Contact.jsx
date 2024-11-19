@@ -1,5 +1,8 @@
-import React from 'react';
+
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contacts/operations';
 import styles from './Contact.module.css';
+
 
 const Contact = ({ data: { id, name, number } }) => {
   return (
@@ -9,7 +12,7 @@ const Contact = ({ data: { id, name, number } }) => {
         <span>📞{number}</span>
       </div>
       <button
-        onClick={() => dispatch(deleteContact({ id, name, number }))}
+        onClick={() => useDispatch(deleteContact({ id, name, number }))}
         className={styles.btn}
         type="button"
       >

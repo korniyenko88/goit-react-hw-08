@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader/Loader';
 import { selectIsError, selectIsLoading } from '../../redux/auth/selectors';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import { Toaster } from 'react-hot-toast';
 
 const LoginPage = () => {
   const loader = useSelector(selectIsLoading);
@@ -19,6 +20,7 @@ const LoginPage = () => {
       </div>
       <div>
         <LoginForm />
+        <Toaster />
       </div>
     </div>
   );

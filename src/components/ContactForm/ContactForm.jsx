@@ -1,9 +1,10 @@
 import styles from './ContactForm.module.css';
 import { ErrorMessage, Formik, Field, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsOps';
+import { addContact } from '../../redux/contacts/operations';
 import { addContactShape } from '../FormFieldValidator/FormFieldValidator';
-import * as Yup from 'yup';
+import { useId } from 'react';
+
 
 
 const INITIAL_VALUES = {

@@ -11,13 +11,13 @@ const RegistrationPage = () => {
 
   return (
     <div>
-      {/* <div>
+      <div>
         {loader && <Loader />}
         {error === 'Unable to fetch user' && (
           <p>Please register or log in to your account</p>
         )}
         {error === 400 && <p>User registration error</p>}
-      </div> */}
+      </div>
       <div >
         <RegistrationForm />
       </div>

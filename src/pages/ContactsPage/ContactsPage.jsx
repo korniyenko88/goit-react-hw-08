@@ -1,5 +1,4 @@
-import React from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'; 
 import { useDispatch, useSelector } from 'react-redux';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import Loader from '../../components/Loader/Loader';
@@ -14,7 +13,7 @@ import {
 } from '../../redux/contacts/selectors';
 
 const ContactsPage = () => {
-  const loader = useSelector(selectLoading);
+  const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const currentContact = useSelector(selectCurrentContact);
   const modal = useSelector(selectConfirmDeletion);
@@ -26,13 +25,14 @@ const ContactsPage = () => {
 
   return (
     <div>
-      {modal && <ModalWindow />}
+      {/* {modal && <ModalWindow />} */}
       <h1>Phonebook</h1>
-      {currentContact ? <EditContactForm /> : <ContactForm />}
+      {/* {currentContact ? <EditContactForm /> : <ContactForm />} */}
+      <ContactForm />
       <SearchBox />
       <div>
-        {loader && !error && <Loader />}
-        {error && !loader && <Error />}
+        {isLoading && !error && <Loader />} 
+        {error && !isLoading && <Error />}
       </div>
       <ContactList />
     </div>

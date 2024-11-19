@@ -6,6 +6,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <AppBar />
+      
       <Suspense fallback={null}>{children}</Suspense>
     </div>
   );
