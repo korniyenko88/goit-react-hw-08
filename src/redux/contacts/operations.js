@@ -1,29 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-const BASE_URL = 'https://connections-api.goit.global/';
+import { authInstance } from '../auth/operations';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/contacts`); 
-      return response.data;
+      const { data } = await authInstance.get(`/contacts`);
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contactData, thunkAPI) => {
     try {
-      const response = await axios.post(`/contacts`, {
-        ...contactData,
-      });
-      return response.data;
+      const { data } = await authInstance.post(`/contacts`, contactData);
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -34,7 +30,7 @@ export const editContact = createAsyncThunk(
   'contacts/editContact',
   async ({ id, name, number }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/contacts/${id}`, {
+      const response = await authInstance.patch(`/contacts/${id}`, {
         name,
         number,
       });
@@ -45,14 +41,24 @@ export const editContact = createAsyncThunk(
   }
 );
 
+
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
+    console.log(`Attempting to delete contact with ID: ${contactId}`);
     try {
-      const response = await axios.delete(`/contacts/${contactId}`);
-      return response.data;
+      const { data } = await authInstance.delete(`/contacts/${contactId}`);
+      console.log('Delete response:', data);
+       return contactId;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMsg =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message;
+      console.error('Error deleting contact:', errorMsg); // Логування помилки
+      return thunkAPI.rejectWithValue(errorMsg);
     }
   }
 );
+
