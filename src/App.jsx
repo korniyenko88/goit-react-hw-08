@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout/Layout';
-
 import { selectIsRefreshing } from './redux/auth/selectors';
 import { apiRefreshUser } from './redux/auth/operations';
 import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
@@ -27,45 +26,41 @@ export const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-      <Layout>
-        
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+    <Layout>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
 
-        <Route
-          path="/register"
-          element={
-            
-            <RestrictedRoute
-              restrictedTo="/contacts"
-              component={<RegistrationPage />}
-            />
-          }
-        />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                restrictedTo="/contacts"
+                component={<RegistrationPage />}
+              />
+            }
+          />
 
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
-          }
-        />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
 
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
-          }
-        />
-      </Routes>
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+        </Routes>
+      </Suspense>
     </Layout>
   );
 };
 
 export default App;
-
-//   <div>
-//     <h1>Phonebook</h1>
-//     <ContactForm />
-//     <SearchBox />
-//     <ContactList />
-//   </div>

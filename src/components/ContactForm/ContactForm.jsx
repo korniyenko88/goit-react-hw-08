@@ -47,9 +47,10 @@ const ContactForm = () => {
         onSubmit={handleSubmit}
       >
         <Form className={styles.form}>
-          <label htmlFor={nameInputId} >
+          <label htmlFor={nameInputId}>
             <span className={styles.formname}>Name</span>
             <Field
+              placeholder="enter your name ..."
               className={styles.input}
               name="name"
               type="text"
@@ -64,6 +65,7 @@ const ContactForm = () => {
           <label htmlFor={numberInputId}>
             <span className={styles.formname}>Number</span>
             <Field
+              placeholder="enter phone number ..."
               className={styles.input}
               name="number"
               type="text"
