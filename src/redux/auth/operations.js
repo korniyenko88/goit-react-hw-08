@@ -14,7 +14,7 @@ export const clearToken = () => {
 };
 
 export const apiRegisterUser = createAsyncThunk(
-  'users/registerUser',
+  'auth/register',
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.post('/users/signup', formData);
@@ -28,7 +28,7 @@ export const apiRegisterUser = createAsyncThunk(
 );
 
 export const apiLogInUser = createAsyncThunk(
-  'auth/logInUser',
+  'auth/login',
   async (formData, thunkApi) => {
     try {
       const { data } = await authInstance.post('/users/login', formData);
@@ -41,7 +41,7 @@ export const apiLogInUser = createAsyncThunk(
 );
 
 export const apiLogOutUser = createAsyncThunk(
-  'auth/logOutUser',
+  'auth/logout',
   async (_, thunkApi) => {
     try {
       const { data } = await authInstance.post('/users/logout');
@@ -55,7 +55,7 @@ export const apiLogOutUser = createAsyncThunk(
 );
 
 export const apiRefreshUser = createAsyncThunk(
-  'auth/RefreshUser',
+  'auth/refresh',
   async (_, thunkApi) => {
     const state = thunkApi.getState();
     const persistToken = state.auth.token;
